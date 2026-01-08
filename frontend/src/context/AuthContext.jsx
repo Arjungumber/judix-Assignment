@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const loadUser = async () => {
         try {
         const res = await axios.get(
-            `${process.env.REACT_APP_API_URL}auth/me`, {
+            `${process.env.REACT_APP_API_BASE_URL}auth/me`, {
             headers: {
             'Authorization' :`Bearer ${localStorage.getItem('token')}`
             },
@@ -26,14 +26,14 @@ const AuthProvider = ({ children }) => {
 
     const login = async (data) => {
         const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}auth/login`, data);
+        `${process.env.REACT_APP_API_BASE__URL}auth/login`, data);
         localStorage.setItem('token', res.data.token);
         await loadUser();
         return (res.data.user);
     };
 
     const signup = async (data) => {
-        await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, data);
+        await axios.post(`${process.env.REACT_APP_BASE_API_URL}auth/signup`, data);
     };
 
     const logout = () => {

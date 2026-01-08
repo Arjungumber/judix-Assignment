@@ -24,11 +24,14 @@ export default function Home() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/admin/users", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_API_BASE_URL}/api/admin/users`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         const data = await response.json();
         setUsers(data);
       } catch (error) {

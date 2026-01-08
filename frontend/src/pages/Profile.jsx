@@ -38,7 +38,7 @@ const Profile = () => {
     setMessage("");
     setLoading(true);
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}users/me`, formData, {
+      await axios.put(`${process.env.REACT_APP_API_BASE_URL}users/me`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -66,7 +66,7 @@ const Profile = () => {
 
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_URL}users/me/password`,
+        `${process.env.REACT_APP_API_BASE_URL}users/me/password`,
         passwords,
         {
           headers: {
