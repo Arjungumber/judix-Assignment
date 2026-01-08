@@ -68,121 +68,125 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-            <div className="col-lg-10">
-                <div className="card shadow-sm">
-                <div className="card-body">
-                    <h4 className="card-title mb-4 text-center">Admin Dashboard</h4>
+      <div className="mt-5 container mx-auto px-4">
+        <div className="flex justify-center">
+          <div className="w-full lg:w-10/12">
+            <div className="shadow-sm bg-white rounded-lg">
+              <div className="p-4">
+                <h4 className="text-center mb-4 text-xl font-semibold">
+                  Admin Dashboard
+                </h4>
 
-                    {loading && (
-                    <div className="text-center my-4">
-                        <div className="spinner-border text-primary" />
-                    </div>
-                    )}
+                {loading && (
+                  <div className="text-center my-4">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-blue-600 border-b-4 border-gray-200 mx-auto"></div>
+                  </div>
+                )}
 
-                    {error && (
-                    <div className="alert alert-danger text-center">{error}</div>
-                    )}
+                {error && (
+                  <div className="bg-red-100 text-red-700 px-3 py-2 rounded text-center mb-3">
+                    {error}
+                  </div>
+                )}
 
-                    {!loading && (
-                    <>
-                        <div className="table-responsive">
-                        <table className="table table-bordered table-hover align-middle">
-                            <thead className="table-light">
-                            <tr>
-                                <th>Email</th>
-                                <th>Full Name</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th className="text-center">Actions</th>
+                {!loading && (
+                  <>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full border border-gray-200 divide-y divide-gray-200 table-auto">
+                        <thead className="bg-gray-100">
+                          <tr>
+                            <th className="px-4 py-2 text-left">Email</th>
+                            <th className="px-4 py-2 text-left">Full Name</th>
+                            <th className="px-4 py-2 text-left">Role</th>
+                            <th className="px-4 py-2 text-left">Status</th>
+                            <th className="px-4 py-2 text-center">Actions</th>
+                          </tr>
+                        </thead>
+
+                        <tbody className="divide-y divide-gray-200">
+                          {users.map((user) => (
+                            <tr key={user._id}>
+                              <td className="px-4 py-2">{user.email}</td>
+                              <td className="px-4 py-2">{user.fullName}</td>
+                              <td className="px-4 py-2">
+                                <span
+                                  className={`inline-block px-2 py-1 text-sm font-medium rounded ${
+                                    user.role === "admin"
+                                      ? "bg-blue-600 text-white"
+                                      : "bg-gray-400 text-white"
+                                  }`}
+                                >
+                                  {user.role}
+                                </span>
+                              </td>
+                              <td className="px-4 py-2">
+                                <span
+                                  className={`inline-block px-2 py-1 text-sm font-medium rounded ${
+                                    user.status === "active"
+                                      ? "bg-green-600 text-white"
+                                      : "bg-red-600 text-white"
+                                  }`}
+                                >
+                                  {user.status}
+                                </span>
+                              </td>
+                              <td className="px-4 py-2 text-center">
+                                {user.status === "active" ? (
+                                  <button
+                                    className="text-sm border border-red-500 text-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white transition"
+                                    onClick={() =>
+                                      updateStatus(user._id, "deactivate")
+                                    }
+                                  >
+                                    Deactivate
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="text-sm border border-green-500 text-green-500 px-2 py-1 rounded hover:bg-green-500 hover:text-white transition"
+                                    onClick={() =>
+                                      updateStatus(user._id, "activate")
+                                    }
+                                  >
+                                    Activate
+                                  </button>
+                                )}
+                              </td>
                             </tr>
-                            </thead>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
 
-                            <tbody>
-                            {users.map((user) => (
-                                <tr key={user._id}>
-                                <td>{user.email}</td>
-                                <td>{user.fullName}</td>
-                                <td>
-                                    <span
-                                    className={`badge ${
-                                        user.role === "admin"
-                                        ? "bg-primary"
-                                        : "bg-secondary"
-                                    }`}
-                                    >
-                                    {user.role}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span
-                                    className={`badge ${
-                                        user.status === "active"
-                                        ? "bg-success"
-                                        : "bg-danger"
-                                    }`}
-                                    >
-                                    {user.status}
-                                    </span>
-                                </td>
-                                <td className="text-center">
-                                    {user.status === "active" ? (
-                                    <button
-                                        className="btn btn-sm btn-outline-danger"
-                                        onClick={() =>
-                                        updateStatus(user._id, "deactivate")
-                                        }
-                                    >
-                                        Deactivate
-                                    </button>
-                                    ) : (
-                                    <button
-                                        className="btn btn-sm btn-outline-success"
-                                        onClick={() =>
-                                        updateStatus(user._id, "activate")
-                                        }
-                                    >
-                                        Activate
-                                    </button>
-                                    )}
-                                </td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                        </div>
+                   
+                    <div className="flex justify-between items-center mt-4">
+                      <button
+                        className="px-3 py-1 border border-gray-400 rounded hover:bg-gray-100 disabled:opacity-50"
+                        disabled={page === 1}
+                        onClick={() => fetchUsers(page - 1)}
+                      >
+                        Prev
+                      </button>
 
-                        {/* Pagination */}
-                        <div className="d-flex justify-content-between align-items-center mt-4">
-                        <button
-                            className="btn btn-outline-secondary"
-                            disabled={page === 1}
-                            onClick={() => fetchUsers(page - 1)}
-                        >
-                            Prev
-                        </button>
+                      <span className="text-gray-500">
+                        Page <strong>{page}</strong> of{" "}
+                        <strong>{totalPages}</strong>
+                      </span>
 
-                        <span className="text-muted">
-                            Page <strong>{page}</strong> of{" "}
-                            <strong>{totalPages}</strong>
-                        </span>
-
-                        <button
-                            className="btn btn-outline-secondary"
-                            disabled={page === totalPages}
-                            onClick={() => fetchUsers(page + 1)}
-                        >
-                            Next
-                        </button>
-                        </div>
-                    </>
-                    )}
-                </div>
-                </div>
+                      <button
+                        className="px-3 py-1 border border-gray-400 rounded hover:bg-gray-100 disabled:opacity-50"
+                        disabled={page === totalPages}
+                        onClick={() => fetchUsers(page + 1)}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-            </div>
+          </div>
         </div>
+      </div>
     );
 };
 

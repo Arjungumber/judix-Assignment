@@ -8,6 +8,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import Navbar from "./component/Navbar";
 import { Toaster } from "react-hot-toast";
 import AdminDashboard from "./pages/AdminDashboard";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -35,6 +36,15 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/tasks"
+            element={
+              <ProtectedRoute>
+                <Home/>
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/profile"
             element={

@@ -15,57 +15,80 @@ const Navbar = () => {
   if (!user) return null; 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-      <div className="container">
-        
-        <div className="navbar-logo" >
-          <FiUsers size={22} />
-          <span className="px-2">User Management</span>
-        </div>
+    <nav className="bg-white shadow-sm border-b">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between w-full py-2">
+          {/* Left section */}
+          <div className="flex items-center gap-2 font-semibold text-gray-800">
+            <FiUsers size={22} />
+            <span>User Management</span>
+          </div>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          <button
+            className="lg:hidden p-2 rounded-md border border-gray-300 text-gray-600 hover:bg-gray-100"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+            <span className="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+            <span className="block w-6 h-0.5 bg-gray-600"></span>
+          </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto align-items-center">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Dashboard
-              </Link>
-            </li>
-
-            {user.role === "admin" && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admin">
-                  Admin
+          <div className="hidden lg:flex justify-end" id="navbarNav">
+            <ul className="flex items-center gap-6">
+              <li>
+                <Link
+                  className="text-gray-700 hover:text-blue-600 font-medium transition"
+                  to="/tasks"
+                >
+                  Tasks
                 </Link>
               </li>
-            )}
+              <li>
+                <Link
+                  className="text-gray-700 hover:text-blue-600 font-medium transition"
+                  to="/"
+                >
+                  Dashboard
+                </Link>
+              </li>
 
-            <li className="nav-item">
-              <Link className="nav-link" to ="/profile">
-                {user.fullName.charAt(0).toUpperCase() + user.fullName.slice(1)} ({user.role})
-              </Link>
-            </li>
+              {user.role === "admin" && (
+                <li>
+                  <Link
+                    className="text-gray-700 hover:text-blue-600 font-medium transition"
+                    to="/admin"
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )}
 
-            <li className="nav-item">
-              <button
-                onClick={handleLogout}
-                className="btn btn-outline-danger ms-2"
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
+              <li>
+                <Link
+                  className="text-gray-700 hover:text-blue-600 font-medium transition"
+                  to="/profile"
+                >
+                  {user.fullName.charAt(0).toUpperCase() +
+                    user.fullName.slice(1)}{" "}
+                  ({user.role})
+                </Link>
+              </li>
+
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="border border-red-500 text-red-500 px-4 py-1.5 rounded-md hover:bg-red-500 hover:text-white transition"
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

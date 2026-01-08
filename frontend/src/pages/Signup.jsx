@@ -53,73 +53,79 @@ const Signup = () => {
   };
 
   return (
-<div className="container d-flex justify-content-center align-items-center min-vh-100">
-  <div className="auth-container p-4 shadow rounded" style={{ maxWidth: '400px', width: '100%' }}>
-    <h2 className="text-center mb-4">Signup</h2>
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="p-4 shadow rounded-lg w-full max-w-md">
+        <h2 className="text-center mb-4 text-2xl font-semibold">Signup</h2>
 
-    {error && <p className="text-danger text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>}
 
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name"
-          value={formData.fullName}
-          onChange={handleChange}
-          className="form-control"
-          required
-        />
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+            disabled={loading}
+          >
+            {loading ? "Signing up..." : "Signup"}
+          </button>
+        </form>
+
+        <p className="text-center mt-3">
+          Already have an account?
+          <Link to="/login" className="ms-1 text-blue-600 hover:underline">
+            Login
+          </Link>
+        </p>
       </div>
-
-      <div className="mb-3">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="form-control"
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="form-control"
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          className="form-control"
-          required
-        />
-      </div>
-
-      <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-        {loading ? "Signing up..." : "Signup"}
-      </button>
-    </form>
-
-    <p className="text-center mt-3">
-      Already have an account? 
-      <Link to="/login" className="text-decoration-none ms-1 login-link">Login</Link>
-    </p>
-  </div>
-</div>
-  )
+    </div>
+  );
 };
 
 export default Signup;

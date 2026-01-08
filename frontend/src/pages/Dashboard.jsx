@@ -24,37 +24,42 @@ const Dashboard = () => {
   };
 
     return (
-        <div className="container mt-5">
-        <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-6">
-            <div className="card shadow p-4 text-center">
-                <h2 className="card-title mb-3">Dashboard</h2>
-                <p className="h5 mb-2">
-                Welcome, <span className="text-primary">{user.fullName}</span>
-                </p>
-                <p className="text-muted mb-4">
+      <div className="max-w-7xl mx-auto mt-10 px-4">
+        <div className="flex justify-center">
+          <div className="w-full max-w-xl">
+            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+              <h2 className="text-2xl font-semibold mb-3">Dashboard</h2>
+
+              <p className="text-lg mb-2">
+                Welcome,{" "}
+                <span className="text-blue-600 font-medium">
+                  {user.fullName}
+                </span>
+              </p>
+
+              <p className="text-gray-500 mb-6">
                 Role: <strong>{user.role}</strong>
-                </p>
+              </p>
 
-                <div className="d-flex justify-content-around mt-4">
+              <div className="flex justify-around mt-6">
                 <button
-                    className="btn btn-primary d-flex align-items-center"
-                    onClick={goToProfile}
+                  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                  onClick={goToProfile}
                 >
-                    <FiSettings className="me-2" /> Settings
+                  <FiSettings /> Settings
                 </button>
 
                 <button
-                    className="btn btn-outline-danger d-flex align-items-center"
-                    onClick={handleLogout}
+                  className="flex items-center gap-2 border border-red-500 text-red-500 px-4 py-2 rounded-md hover:bg-red-500 hover:text-white transition"
+                  onClick={handleLogout}
                 >
-                    <FaSignOutAlt className="me-2" /> Logout
+                  <FaSignOutAlt /> Logout
                 </button>
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     );
 };
 

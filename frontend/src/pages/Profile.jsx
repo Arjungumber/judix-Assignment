@@ -86,134 +86,122 @@ const Profile = () => {
   };
 
   return (
-    <div className="container py-5">
-      <div
-        className="mx-auto p-4 rounded"
-        style={{
-          maxWidth: "1100px",
-          backgroundColor: "#f5f6f8",
-        }}
-      >
+    <div className="max-w-7xl mx-auto py-10 px-4">
+      <div className="mx-auto p-6 rounded-lg bg-gray-100 max-w-[1100px] relative">
         {loading && (
-          <div className="loader-overlay">
-            <div className="spinner-border text-primary" />
+          <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+            <div className="h-10 w-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
           </div>
         )}
-        <div className="row g-4">
-          <div className="col-md-4">
-            <div className="card shadow-sm text-center h-100">
-              <div className="card-body d-flex flex-column justify-content-center">
-                <div
-                  className="rounded-circle bg-primary text-white mx-auto mb-3 d-flex align-items-center justify-content-center"
-                  style={{ width: "90px", height: "90px", fontSize: "36px" }}
-                >
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Left Profile Card */}
+          <div className="md:col-span-4">
+            <div className="bg-white shadow-sm rounded-lg text-center h-full">
+              <div className="flex flex-col items-center justify-center h-full p-6">
+                <div className="w-[90px] h-[90px] rounded-full bg-blue-600 text-white flex items-center justify-center text-4xl mb-3">
                   {formData.fullName?.charAt(0).toUpperCase()}
                 </div>
 
-                <h5 className="mb-1">{formData.fullName}</h5>
-                <p className="text-muted mb-0">{formData.email}</p>
+                <h5 className="font-semibold">{formData.fullName}</h5>
+                <p className="text-gray-500">{formData.email}</p>
               </div>
             </div>
           </div>
 
-          <div className="col-md-8">
-            <div className="card shadow-sm mb-4">
-              <div className="card-body">
-                <h5 className="card-title mb-3">Update Profile</h5>
+          {/* Right Section */}
+          <div className="md:col-span-8 space-y-6">
+            {/* Update Profile */}
+            <div className="bg-white shadow-sm rounded-lg">
+              <div className="p-6">
+                <h5 className="font-semibold mb-4">Update Profile</h5>
 
                 <form onSubmit={updateProfile}>
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label className="form-label">Full Name</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-1">
+                        Full Name
+                      </label>
                       <input
                         type="text"
                         name="fullName"
-                        className="form-control"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={formData.fullName}
                         onChange={handleProfileChange}
                       />
                     </div>
 
-                    <div className="col-md-6 mb-3">
-                      <label className="form-label">Email</label>
+                    <div>
+                      <label className="block text-sm font-medium mb-1">
+                        Email
+                      </label>
                       <input
                         type="email"
                         name="email"
-                        className="form-control"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={formData.email}
                         onChange={handleProfileChange}
                       />
                     </div>
                   </div>
 
-                  <div className="text-end">
-                    <button className="btn btn-primary">Save Changes</button>
+                  <div className="text-right mt-4">
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                      Save Changes
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
 
-            <div className="card shadow-sm">
-              <div className="card-body">
-                <h5 className="card-title mb-3">Change Password</h5>
+            {/* Change Password */}
+            <div className="bg-white shadow-sm rounded-lg">
+              <div className="p-6">
+                <h5 className="font-semibold mb-4">Change Password</h5>
 
                 <form onSubmit={changePassword}>
-                  <div className="row">
-                    <div className="col-md-6 mb-3 position-relative">
-                      <label className="form-label">Current Password</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="relative">
+                      <label className="block text-sm font-medium mb-1">
+                        Current Password
+                      </label>
                       <input
                         type={showCurrent ? "text" : "password"}
                         name="currentPassword"
-                        className="form-control"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={passwords.currentPassword}
                         onChange={handlePasswordChange}
                       />
                       <span
                         onClick={() => setShowCurrent(!showCurrent)}
-                        style={{
-                          position: "absolute",
-                          top: "67%",
-                          right: "20px",
-                          transform: "translateY(-50%)",
-                          cursor: "pointer",
-                          color: "#555",
-                          fontSize: "1.2rem",
-                          userSelect: "none",
-                        }}
+                        className="absolute right-3 top-[38px] cursor-pointer text-gray-600 text-lg select-none"
                       >
                         {showCurrent ? <IoIosEyeOff /> : <IoIosEye />}
                       </span>
                     </div>
 
-                    <div className="col-md-6 mb-3">
-                      <label className="form-label">New Password</label>
+                    <div className="relative">
+                      <label className="block text-sm font-medium mb-1">
+                        New Password
+                      </label>
                       <input
                         type={showNew ? "text" : "password"}
                         name="newPassword"
-                        className="form-control"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={passwords.newPassword}
                         onChange={handlePasswordChange}
                       />
                       <span
                         onClick={() => setShowNew(!showNew)}
-                        style={{
-                          position: "absolute",
-                          top: "53%",
-                          right: "24px",
-                          transform: "translateY(-50%)",
-                          cursor: "pointer",
-                          color: "#555",
-                          fontSize: "1.2rem",
-                          userSelect: "none",
-                        }}
+                        className="absolute right-3 top-[38px] cursor-pointer text-gray-600 text-lg select-none"
                       >
                         {showNew ? <IoIosEyeOff /> : <IoIosEye />}
                       </span>
                     </div>
                   </div>
 
-                  <div className="text-end">
-                    <button className="btn btn-outline-danger">
+                  <div className="text-right mt-4">
+                    <button className="border border-red-500 text-red-500 px-4 py-2 rounded-md hover:bg-red-500 hover:text-white transition">
                       Change Password
                     </button>
                   </div>
