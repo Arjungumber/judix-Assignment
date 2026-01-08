@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const signup = async (data) => {
-        await axios.post(`${process.env.REACT_APP_BASE_API_URL}auth/signup`, data);
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}auth/signup`, data);
     };
 
     const logout = () => {
