@@ -16,6 +16,10 @@ const AdminDashboard = () => {
     const fetchUsers = async (pageNo = 1) => {
         try {
         setLoading(true);
+          console.log(
+            "USERS API:",
+            `${process.env.REACT_APP_API_URL}admin/users?page=${pageNo}`
+          );
         const res = await axios.get(
             `${process.env.REACT_APP_API_URL}admin/users?page=${pageNo}&limit=10`,
             {
