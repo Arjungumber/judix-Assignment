@@ -16,12 +16,8 @@ const AdminDashboard = () => {
     const fetchUsers = async (pageNo = 1) => {
         try {
         setLoading(true);
-          console.log(
-            "USERS API:",
-            `${process.env.REACT_APP_API_URL}admin/users?page=${pageNo}`
-          );
         const res = await axios.get(
-            `${process.env.REACT_APP_API_URL}admin/users?page=${pageNo}&limit=10`,
+            `${process.env.REACT_APP_API_BASE_URL}admin/users?page=${pageNo}&limit=10`,
             {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -56,13 +52,13 @@ const AdminDashboard = () => {
         setLoading(true);
         try {
         await axios.put(
-            `${process.env.REACT_APP_API_URL}admin/users/${id}/${action}`,
-            {},
-            {
+          `${process.env.REACT_APP_API_BASE_URL}admin/users/${id}/${action}`,
+          {},
+          {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-            }
+          }
         );
         setLoading(false);
         toast.success(`User ${actionText[action]} successfully`);
