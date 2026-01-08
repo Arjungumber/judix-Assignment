@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
 
     const login = async (data) => {
         const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE__URL}auth/login`, data);
+        `${process.env.REACT_APP_API_BASE_URL}auth/login`, data);
         localStorage.setItem('token', res.data.token);
         await loadUser();
         return (res.data.user);
