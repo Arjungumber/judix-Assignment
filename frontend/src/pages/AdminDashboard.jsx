@@ -32,7 +32,9 @@ const AdminDashboard = () => {
         toast.success("Users Fetched successfully");
         } catch (err) {
         setError("Failed to load users");
-        toast.error(err);
+        toast.error(
+          err?.response?.data?.message || err.message || "Failed to load users"
+        );
         } finally {
         setLoading(false);
         }
@@ -40,7 +42,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         fetchUsers(page);
-    }, []);
+    }, [page]);
 
     const updateStatus = async (id, action) => {
         const confirm = window.confirm(
@@ -157,12 +159,11 @@ const AdminDashboard = () => {
                       </table>
                     </div>
 
-                   
                     <div className="flex justify-between items-center mt-4">
                       <button
                         className="px-3 py-1 border border-gray-400 rounded hover:bg-gray-100 disabled:opacity-50"
                         disabled={page === 1}
-                        onClick={() => fetchUsers(page - 1)}
+                        onClick={() => setPage(page - 1)}
                       >
                         Prev
                       </button>
@@ -175,7 +176,7 @@ const AdminDashboard = () => {
                       <button
                         className="px-3 py-1 border border-gray-400 rounded hover:bg-gray-100 disabled:opacity-50"
                         disabled={page === totalPages}
-                        onClick={() => fetchUsers(page + 1)}
+                        onClick={() => setPage(page + 1)}
                       >
                         Next
                       </button>
